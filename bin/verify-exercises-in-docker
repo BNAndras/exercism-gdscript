@@ -104,4 +104,7 @@ if [[ -z "${image}" ]]; then
         die "docker pull ${image} failed. Check the test runner docs at https://exercism.org/docs/building/tooling/test-runners for more information."
 fi
 
+docker image inspect "${image}" >/dev/null 2>&1 ||
+    die "Docker image '${image}' not found"
+
 verify_exercises "$@"
