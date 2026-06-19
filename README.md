@@ -6,6 +6,10 @@ Exercism exercises in GDScript.
 
 ## Testing
 
+There are two options for iterating over all exercises to see if their exemplar/example implementation passes all the tests.  Option B also allows single-exercise verification and overriding which Docker image to use for the test runner.
+
+### Option A: Via local `godot`
+
 To set up for testing, clone https://github.com/exercism/gdscript-test-runner and move its contents to `/opt/exercism/gdscript/test-runner`:
 
 ```sh
@@ -14,8 +18,29 @@ sudo mkdir -p /opt/exercism/gdscript/
 sudo mv gdscript-test-runner/ /opt/exercism/gdscript/test-runner/
 ```
 
-To test the exercises, run `godot --headless -s bin/verify-exercises.gd`.
-This command will iterate over all exercises and check to see if their exemplar/example implementation passes all the tests.
+To test the exercises, run `godot --headless -s bin/verify-exercises.gd` from the present repo's root (not the gdscript-test-runner repo root).
+
+### Option B: Via docker
+
+The docker verifier is included in the present repo, just run this from its root:
+
+```sh
+bin/verify-exercises-in-docker
+```
+
+If you want to verify a single exercise:
+
+```sh
+bin/verify-exercises-in-docker two-fer
+```
+
+If you want to verify all exercises against a specified test runner:
+
+```sh
+bin/verify-exercises-in-docker -i my-local-image
+```
+
+This allows maintainers to preview upgrades to the test runner.
 
 ### Track linting
 
